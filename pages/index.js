@@ -8,6 +8,7 @@ export default function Home({ ethan, uyen }) {
   const [percent, setPercent] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   const [name, setName] = useState("")
   const [date, setDate] = useState("")
+  const [transactions, setTransactions] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +49,7 @@ export default function Home({ ethan, uyen }) {
     let person = personSelected(e.target[0][0].selected, e.target[0][1].selected)
     const month = monthSelected(e.target[1][0].selected, e.target[1][1].selected, e.target[1][2].selected, e.target[1][3].selected, e.target[1][4].selected, e.target[1][5].selected, e.target[1][6].selected, e.target[1][7].selected, e.target[1][8].selected, e.target[1][9].selected, e.target[1][10].selected, e.target[1][11].selected)
     const year = e.target[2].value
+    const items = []
 
     let totalSum = 0
     let totalSumEatingOut = 0
@@ -69,6 +71,7 @@ export default function Home({ ethan, uyen }) {
 
     person.forEach((item) => {
       if (item.date.substring(5, 7) === month && item.date.substring(0, 4) === year) {
+        items.push(item)
         const amount = parseFloat(item.amount)
         totalSum += amount
         if (item.category === 'eatingout') {
@@ -96,11 +99,12 @@ export default function Home({ ethan, uyen }) {
     })
 
     setName(personSelected(e.target[0][0].selected, e.target[0][1].selected))
-    setAmount([totalSum, totalSumEatingOut, totalSumShopping, totalSumTravel, totalSumEntertainment, totalSumGroceries, totalSumCoffee, totalSumTransportation, totalSumBills, totalSumInvestment, totalSumMisc])
+    setAmount([totalSum.toFixed(2), totalSumEatingOut.toFixed(2), totalSumShopping.toFixed(2), totalSumTravel.toFixed(2), totalSumEntertainment.toFixed(2), totalSumGroceries.toFixed(2), totalSumCoffee.toFixed(2), totalSumTransportation.toFixed(2), totalSumBills.toFixed(2), totalSumInvestment.toFixed(2), totalSumMisc.toFixed(2)])
     setPercent([totalSum, totalSumEatingOut, totalSumShopping, totalSumTravel, totalSumEntertainment, totalSumGroceries, totalSumCoffee, totalSumTransportation, totalSumBills, totalSumInvestment, totalSumMisc].map((item) => {
       return Math.round((item / totalSum) * 100)
     }))
     setDate(month + '/' + year)
+    setTransactions(items)
   }
 
   return (
@@ -204,6 +208,14 @@ export default function Home({ ethan, uyen }) {
           <p>Investment: {amount[9]} ({percent[9]}%)</p>
           <p>Misc: {amount[10]} ({percent[10]}%)</p>
         </div>
+        {transactions.map((transaction) => (
+          <div key={transaction._id}>
+            <p>Date: {transaction.date}</p>
+            <p>Category: {transaction.category}</p>
+            <p>Description: {transaction.description}</p>
+            <p>Amount: {transaction.amount}</p>
+          </div>
+        ))}
       </div>
     </>
   )
