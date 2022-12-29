@@ -195,18 +195,19 @@ export default function Home({ ethan, uyen }) {
 
       <div className={styles.form}>
         <h1>{name}</h1>
-        <h2>Summary of {date}: {amount[0]}</h2>
+        <h2>Summary of {date}: ${amount[0]}</h2>
+        <h2>Money left for the month: ${(200 - amount[0]).toFixed(2)}</h2>
         <div>
-          <p>Eating out: {amount[1]} ({percent[1]}%)</p>
-          <p>Shopping: {amount[2]} ({percent[2]}%)</p>
-          <p>Travel: {amount[3]} ({percent[3]}%)</p>
-          <p>Entertainment: {amount[4]} ({percent[4]}%)</p>
-          <p>Groceries: {amount[5]} ({percent[5]}%)</p>
-          <p>Coffee: {amount[6]} ({percent[6]}%)</p>
-          <p>Transportation: {amount[7]} ({percent[7]}%)</p>
-          <p>Bills: {amount[8]} ({percent[8]}%)</p>
-          <p>Investment: {amount[9]} ({percent[9]}%)</p>
-          <p>Misc: {amount[10]} ({percent[10]}%)</p>
+          <p>Eating out: {amount[1]}   ({percent[1]}%)</p>
+          <p>Shopping: {amount[2]}   ({percent[2]}%)</p>
+          <p>Travel: {amount[3]}   ({percent[3]}%)</p>
+          <p>Entertainment: {amount[4]}   ({percent[4]}%)</p>
+          <p>Groceries: {amount[5]}   ({percent[5]}%)</p>
+          <p>Coffee: {amount[6]}   ({percent[6]}%)</p>
+          <p>Transportation: {amount[7]}   ({percent[7]}%)</p>
+          <p>Bills: {amount[8]}   ({percent[8]}%)</p>
+          <p>Investment: {amount[9]}   ({percent[9]}%)</p>
+          <p>Misc: {amount[10]}   ({percent[10]}%)</p>
         </div>
         {transactions.map((transaction) => (
           <div key={transaction._id}>
