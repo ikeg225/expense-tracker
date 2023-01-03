@@ -38,9 +38,13 @@ export default function Home({ ethan, uyen }) {
       body: JSONData
     }
 
-    fetch(endpoint, options)
-
-    location.reload();
+    fetch(endpoint, options).then((res) => {
+      if (res.status === 200) {
+        setTimeout(() => {
+          window.location.reload()
+        }, 3000)
+      }
+    })
   }
 
   const getSummary = (e) => {
